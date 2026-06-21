@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NavSim – AI Robot Navigation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary-custom">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/">🤖 NavSim</a>
+      <span class="navbar-text text-white-50 small">AI-Based Autonomous Navigation using Deep RL</span>
+    </div>
+  </nav>
+
+  <div class="container py-4">
+
+    <div class="row g-4">
+      <!-- LEFT: Controls -->
+      <div class="col-lg-4">
+        <div class="card shadow-sm control-card">
+          <div class="card-body">
+            <h5 class="fw-bold mb-3">⚙️ Simulation Controls</h5>
+
+            <label class="form-label small fw-bold">Algorithm</label>
+            <select id="algoSelect" class="form-select mb-3">
+              <option value="ppo">PPO (Proximal Policy Optimization)</option>
+              <option value="dqn">DQN (Deep Q-Network)</option>
+              <option value="astar">A* (Classical Planning - Baseline)</option>
+            </select>
+
+            <label class="form-label small fw-bold">Static Obstacles</label>
+            <input type="range" id="staticRange" class="form-range" min="0" max="12" value="6">
+            <div class="text-muted small mb-3">Count: <span id="staticVal">6</span></div>
+
+            <label class="form-label small fw-bold">Dynamic (Moving) Obstacles</label>
+            <input type="range" id="dynamicRange" class="form-range" min="0" max="8" value="4">
+            <div class="text-muted small mb-3">Count: <span id="dynamicVal">4</span></div>
+
+            <div class="d-grid gap-2">
+              <button id="startBtn" class="btn btn-primary-custom" onclick="startSimulation()">
+                ▶️ Start New Simulation
+              </button>
+              <button id="playPauseBtn" class="btn btn-outline-primary" onclick="togglePlay()" disabled>
+                ⏸️ Pause
+              </button>
+              <button id="resetBtn" class="btn btn-outline-secondary" onclick="resetEpisode()" disabled>
+                🔄 Reset Episode
+              </button>
+            </div>
+
+            <hr>
+            <div class="speed-control">
+              <label class="form-label small fw-bold">Simulation Speed</label>
+              <input type="range" id="speedRange" class="form-range" min="1" max="10" value="5">
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Card -->
+        <div class="card shadow-sm mt-3 control-card">
+          <div class="card-body">
+            <h5 class="fw-bold mb-3">📊 Live Statistics</h5>
+            <div class="row text-center g-2">
+              <div class="col-6">
+                <div class="stat-box">
+                  <div class="stat-value" id="statEpisodes">0</div>
+                  <div class="stat-label">Episodes</div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="stat-box success">
+                  <div class="stat-value" id="statSuccess">0%</div>
+                  <div class="stat-label">Success Rate</div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="stat-box danger">
+                  <div class="stat-value" id="statCollision">0%</div>
+                  <div class="stat-label">Collision Rate</div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="stat-box">
+                  <div class="stat-value" id="statReward">0</div>
+                  <div class="stat-label">Last Reward</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-3">
+              <small class="fw-bold text-muted">Recent Episodes</small>
+              <div id="episodeHistory" class="episode-history mt-2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Visualization -->
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="fw-bold mb-0">🗺️ Live Navigation View</h5>
+              <span id="statusBadge" class="badge bg-secondary">Not Started</span>
+            </div>
+            <canvas id="simCanvas" width="700" height="700" class="sim-canvas"></canvas>
+            <div class="legend mt-2 d-flex flex-wrap gap-3 small">
+              <span><span class="dot robot"></span> Robot</span>
+              <span><span class="dot goal"></span> Goal</span>
+              <span><span class="dot static"></span> Static Obstacle</span>
+              <span><span class="dot dynamic"></span> Moving Obstacle</span>
+              <span><span class="dot trail"></span> Path Trail</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-banner mt-3" id="infoBanner">
+          👈 Configure settings and click <strong>Start New Simulation</strong> to watch the AI agent navigate in real time.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer mt-4 py-4 text-center text-muted">
+    <small>
+      NavSim v1.0 &nbsp;|&nbsp; B.Voc AI&DS Final Year Project &nbsp;|&nbsp;
+      AI-Based Autonomous Navigation Using Deep Reinforcement Learning &nbsp;|&nbsp;
+      <a href="https://github.com/yourusername/robot-navigation-drl" target="_blank">GitHub</a>
+    </small>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+* { font-family: 'Poppins', sans-serif; }
+body { background: #F0F4FF; color: #333; }
+
+.bg-primary-custom { background: linear-gradient(135deg, #1F3864 0%, #2E75B6 100%) !important; }
+
+.control-card { border: none; border-radius: 16px; }
+.control-card .card-body { padding: 1.5rem; }
+
+.btn-primary-custom {
+  background: linear-gradient(135deg, #1F3864, #2E75B6);
+  color: white; border: none; border-radius: 10px;
+  font-weight: 600; padding: 10px;
+}
+.btn-primary-custom:hover { background: linear-gradient(135deg, #2E75B6, #1F3864); color: white; }
+
+.sim-canvas {
+  width: 100%;
+  background: #1a2332;
+  border-radius: 12px;
+  border: 2px solid #2E75B6;
+  display: block;
+}
+
+.legend { color: #555; }
+.dot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:4px; }
+.dot.robot { background:#00D9FF; }
+.dot.goal { background:#FFD700; }
+.dot.static { background:#888; }
+.dot.dynamic { background:#FF4757; }
+.dot.trail { background:#2E75B6; }
+
+.stat-box {
+  background: #F8F9FF;
+  border-radius: 10px;
+  padding: 10px 5px;
+}
+.stat-box.success { background: #E8F8EE; }
+.stat-box.danger { background: #FDEAEA; }
+.stat-value { font-size: 1.4rem; font-weight: 700; color: #1F3864; }
+.stat-box.success .stat-value { color: #1F7848; }
+.stat-box.danger .stat-value { color: #DC3545; }
+.stat-label { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.episode-history { max-height: 150px; overflow-y: auto; }
+.episode-item {
+  display: flex; justify-content: space-between;
+  padding: 4px 8px; border-radius: 6px; font-size: 0.78rem; margin-bottom: 3px;
+}
+.episode-item.success { background: #E8F8EE; color: #1F7848; }
+.episode-item.collision { background: #FDEAEA; color: #DC3545; }
+.episode-item.timeout { background: #FFF8E1; color: #856404; }
+
+.info-banner {
+  background: #EEF4FF;
+  border: 1px solid #C7DBF5;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  color: #1F3864;
+}
+
+#statusBadge { font-size: 0.75rem; }
+
+.footer { border-top: 1px solid #E0E8F5; background: white; }
+.footer a { color: #2E75B6; text-decoration: none; }
